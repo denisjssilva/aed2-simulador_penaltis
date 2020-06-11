@@ -50,13 +50,30 @@ void estatistica();
 int main (int argv, char** args)
 {
 
+    // inicio da parte de funcionamento
+        int cx, cy, gx, gy, opcao;
+        int cont=0, contFora = 0, contDefesa = 0, contGol = 0;
+
+        fila cobranca;
+        fila fora;
+        fila defesa;
+        fila gol;
+
+        srand(time(0)); //semente para gerar numeros aleatorios
+
+        create(&cobranca);
+        create(&fora);
+        create(&defesa);
+        create(&gol);
+
+
     //INICIA A SDL
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -111,24 +128,6 @@ int main (int argv, char** args)
                     teclaContinuar();
                     telaBranco();
                     system("cls");
-
-
-                    // inicio da parte de funcionamento
-                    int cx, cy, gx, gy, opcao;
-                    int cont=0, contFora = 0, contDefesa = 0, contGol = 0;
-
-                    fila cobranca;
-                    fila fora;
-                    fila defesa;
-                    fila gol;
-
-                    srand(time(0)); //semente para gerar numeros aleatorios
-
-                    create(&cobranca);
-                    create(&fora);
-                    create(&defesa);
-                    create(&gol);
-
 
 
                     do //loop de execuçao do codigo de cobrancas e armazenamento dos dados nas filas
@@ -472,13 +471,13 @@ void exibeEstatisticas(int cont, int contFora, int contDefesa, int contGol) //ge
 
 int teclaContinuar() //mensagem de execuçao em todo fim de tarefa.
 {
-    printf(" Digite qualquer tecla para continuar: ");
+    printf(" Digite ENTER para continuar: ");
     _getch();
 }
 
 void telaBranco()
 {
-                            SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 1, 1, SDL_WINDOW_OPENGL);
+                            SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1, 1, 1, 1, SDL_WINDOW_OPENGL);
                             SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
                             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
                             SDL_Surface *branco = IMG_Load("images/branco.jpg");
@@ -510,7 +509,7 @@ void telaMenu()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -542,7 +541,7 @@ void telaexplicamenu()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -575,7 +574,7 @@ void telalistadeacertos()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -607,7 +606,7 @@ void telalistadefesa()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -640,7 +639,7 @@ void telaerro()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -672,7 +671,7 @@ void telalistacompleta()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -704,7 +703,7 @@ void estatistica()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 650, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
