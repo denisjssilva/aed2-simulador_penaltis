@@ -574,7 +574,7 @@ void telalistadeacertos()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
