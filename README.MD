@@ -8,6 +8,12 @@ Desenvolver uma aplicação, em linguagem C, para colocar em prática o conhecim
 
 ![menu](https://user-images.githubusercontent.com/29512626/84351781-67024b80-ab92-11ea-9a48-cae8fe07cde0.png)
 
+## Membros
+Denis ([GitHub](https://github.com/denisjssilva))
+Leo ([GitHub](https://github.com/Leooh99))
+Maycon ([GitHub](https://github.com/mayconbr))
+Yury Regis ([GitHub](https://github.com/YuryRegis))
+
 ## Fonte / Referência
 * SDL2 Dll [Download](https://www.libsdl.org/download-2.0.php);
 * SDL2_Image Dll [Download](https://www.libsdl.org/projects/SDL_image/);
