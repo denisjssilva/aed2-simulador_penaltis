@@ -4,11 +4,15 @@
 Aplicação em desenvolvimento...
 
 ![menu](https://user-images.githubusercontent.com/29512626/84351781-67024b80-ab92-11ea-9a48-cae8fe07cde0.png)
-
 ## Objetivo
 Desenvolver uma aplicação, em linguagem C, para colocar em prática o conhecimento adquirido nas aulas teóricas de Algoritmos e Estrutura de Dados II. A aplicação desenvolvida simula cobranças de penaltes com intuito apenas educacional.
 
 ![explicamenu](https://user-images.githubusercontent.com/29512626/84532991-a7aab380-acbd-11ea-93ab-c2513791c4d1.jpg)
+## Membros / Colaboradores
+* Denis ([GitHub](https://github.com/denisjssilva))
+* Leo ([GitHub](https://github.com/Leooh99))
+* Maycon ([GitHub](https://github.com/mayconbr))
+* Yury Regis ([GitHub](https://github.com/YuryRegis))
 
 ## Fonte / Referência
 * SDL2 Dll [Download](https://www.libsdl.org/download-2.0.php);
@@ -16,3 +20,4 @@ Desenvolver uma aplicação, em linguagem C, para colocar em prática o conhecim
 * Atkins, Jonathan C. - [SDL2_image documentation](https://www.libsdl.org/projects/SDL_image/docs/SDL_image.html);
 * Miranda, Tales - [Abaixo o nivel! Seu primeiro game em SDL;](https://abaixonivel.wordpress.com/tutoriais/sdl2/seu-primeiro-game-em-sdl-p1/)
 * AtoZ - C Game Development with SDL 2 - Creating a window ([YouTube](https://www.youtube.com/watch?v=23rD7xdd9ZE&list=PL0A4HYJyi7d_qL97vyuNqlJzKXtXEoNZK&index=7))
+
