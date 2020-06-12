@@ -1,3 +1,27 @@
+/*
+Laboratório de Algoritmos e Estruturas de Dados II - Ciência da Computação PUC Minas 1ºsem./20
+
+Simulador de cobranças de pênalti - o intuito do programa é gerar aleatoriamente pontos que se deslocam em 2 eixos, atribuindo valores para chute e goleiro.
+Analisando os pontos, chega-se ao resultado de Gol, Defesa do Goleiro ou chute pra fora. A partir dai são criadas listas com os resultados e, então,
+um menu de estatísticas gerais com os resultados obtidos. Há ainda um menu de explicação do funcionamento correlacionando o simulador com noçoes básicas de
+geometria plana.
+
+Para a correta execução do código é preciso fazer a instalação da biblioteca gráfica SDL2, ao instalar seus arquivos base e também os arquivos referentes
+a execução de imagens. Seguem os links:
+https://www.libsdl.org/release/SDL2-devel-2.0.12-mingw.tar.gz                                arquivo base
+https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.5-mingw.tar.gz        arquivo para imagens
+
+Alunos:
+
+Denis José de Souza e Silva
+Leonardo Andrade Heldt
+Maycon Brandão Bruzolato
+Yury Regis Neiva Pereira
+
+REPOSITORIO GITHUB -> https://github.com/denisjssilva/aed2-simulador_penaltis/edit/master
+
+*/
+
 #define SDL_MAIN_HANDLED
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,14 +62,14 @@ int verifica_cobranca (int cx, int cy, int gx, int gy); //determina resultado da
 void imprimeGOL(); //exibicao grafica dos pontos de interesse no simulador - VERIFIQUEM AQUI
 void exibeEstatisticas(int cont, int contFora, int contDefesa, int contGol); //exibir estatisticas gerais de simulacao
 int teclaContinuar(); //pressione qualquer tecla para continuar + getch
-void telaBranco ();
-void telaMenu();
-void telaexplicamenu();
-void telalistacompleta();
-void telalistadeacertos();
-void telalistadefesa();
-void telaerro();
-void estatistica();
+void telaBranco (); //funçao para evitar erro de geraçao de imagens repetidas
+void telaMenu(); //funçao que gera tela de menu
+void telaexplicamenu(); //funçao que gera tela de explicaçao do simulador
+void telalistacompleta(); //funçao que gera tela com a lista de opçoes
+void telalistadeacertos(); //funçao que gera tela de espera na lista de acertos
+void telalistadefesa(); //funçao que gera tela de espera na lista de defesas
+void telaerro(); //funçao que gera tela de espera na lista de erros
+void estatistica(); //funçao que gera tela de espera na opçao de exibir estatisticas gerais
 
 int main (int argv, char** args)
 {
@@ -73,7 +97,7 @@ int main (int argv, char** args)
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
@@ -81,7 +105,7 @@ int main (int argv, char** args)
 
 
     //RENDERIZA IMAGEM DE INICIO
-    SDL_Surface *inicio = IMG_Load("images/inicio.jpg");
+    SDL_Surface *inicio = IMG_Load("imagens/inicio.jpg");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -107,10 +131,10 @@ int main (int argv, char** args)
                     printf("\n Simulador de cobrancas de penalti\n\n");
                     teclaContinuar();
 
-                    //system("cls"); //fun�ao do windows para limpar a tela
+                    //system("cls"); //funçao do windows para limpar a tela
 
                     //RENDERIZA IMAGEM DE EXPLICACAO
-                    SDL_Surface *explicacao = IMG_Load("images/explicacao.jpg");
+                    SDL_Surface *explicacao = IMG_Load("imagens/explicacao.jpg");
                     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, explicacao);
 
                     SDL_Rect texture_destination;
@@ -130,7 +154,7 @@ int main (int argv, char** args)
                     system("cls");
 
 
-                    do //loop de execu�ao do codigo de cobrancas e armazenamento dos dados nas filas
+                    do //loop de execuçao do codigo de cobrancas e armazenamento dos dados nas filas
                     {
                         cont++; //contador de cobrancas
                         geraCoordenadas(&cx, &cy, &gx, &gy); //chamada da funcao que gera randomicamente as coordenadas de chute e goleiro
@@ -167,7 +191,7 @@ int main (int argv, char** args)
                         {
                             //RENDERIZA IMAGEM DE FORA
 
-                            SDL_Surface *telafora = IMG_Load("images/fora.jpg");
+                            SDL_Surface *telafora = IMG_Load("imagens/fora.jpg");
                             SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, telafora);
 
                             SDL_Rect texture_destination;
@@ -191,7 +215,7 @@ int main (int argv, char** args)
                         else if(verifica_cobranca (cx, cy, gx, gy)==0)
                         {
                             //RENDERIZA IMAGEM DE DEFESA
-                            SDL_Surface *teladefesa = IMG_Load("images/defesa.jpg");
+                            SDL_Surface *teladefesa = IMG_Load("imagens/defesa.jpg");
                             SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, teladefesa);
 
                             SDL_Rect texture_destination;
@@ -213,7 +237,7 @@ int main (int argv, char** args)
                         else
                         {
                             //RENDERIZA IMAGEM DE GOL
-                            SDL_Surface *telagol = IMG_Load("images/gol.jpg");
+                            SDL_Surface *telagol = IMG_Load("imagens/gol.jpg");
                             SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, telagol);
 
                             SDL_Rect texture_destination;
@@ -240,7 +264,7 @@ int main (int argv, char** args)
 
 
 
-                    do //loop de execu�ao do menu
+                    do //loop de execuçao do menu
                     {
                         telaMenu ();
 
@@ -315,15 +339,15 @@ int main (int argv, char** args)
         return 0;
     }
 
-//fun��es
+//funções
 
-void create(fila *s)
+void create(fila *s) //criar fila
 {
     s->inicio = NULL;
     s->fim = NULL;
 }
 
-int pushCobranca(fila *s, int cx, int cy, int gx, int gy, int cont)
+int pushCobranca(fila *s, int cx, int cy, int gx, int gy, int cont) //inserir pontos na fila
 {
     struct no *aux;
     aux =(struct no *)malloc(sizeof(struct no));
@@ -362,7 +386,7 @@ int pushCobranca(fila *s, int cx, int cy, int gx, int gy, int cont)
     return 1;
 }
 
-int isEmpty (fila s)
+int isEmpty (fila s) //ver se fila está vazia
 {
 
     if (s.inicio == NULL)
@@ -370,7 +394,7 @@ int isEmpty (fila s)
     return 0;
 }
 
-void geraCoordenadas(int *cx, int *cy, int *gx, int *gy) //gera valores aleatorios dentro dos limites estabelecidos para execu�ao do simulador
+void geraCoordenadas(int *cx, int *cy, int *gx, int *gy) //gera valores aleatorios dentro dos limites estabelecidos para execuçao do simulador
 {
 
 
@@ -386,7 +410,7 @@ void geraCoordenadas(int *cx, int *cy, int *gx, int *gy) //gera valores aleatori
 
 }
 
-void mostrafila (fila s)
+void mostrafila (fila s) //imprime a fila
 {
     struct no *aux;
     aux = s.inicio;
@@ -469,37 +493,37 @@ void exibeEstatisticas(int cont, int contFora, int contDefesa, int contGol) //ge
     printf(" Porcentagem de Chutes para Fora: %.2f%%\n\n", (contFora/contFloat)*100);
 }
 
-int teclaContinuar() //mensagem de execu�ao em todo fim de tarefa.
+int teclaContinuar() //mensagem de execuçao em todo fim de tarefa.
 {
     printf(" Digite ENTER para continuar: ");
     _getch();
 }
 
-void telaBranco()
+void telaBranco() //gera uma tela minima para evitar bug de repetiçao de imagens
 {
-                            SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1, 1, 1, 1, SDL_WINDOW_OPENGL);
-                            SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-                            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-                            SDL_Surface *branco = IMG_Load("images/branco.jpg");
-                            SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, branco);
-                            SDL_DestroyWindow(window);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1, 1, 1, 1, SDL_WINDOW_OPENGL);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_Surface *branco = IMG_Load("imagens/branco.jpg");
+    SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, branco);
+    SDL_DestroyWindow(window);
 
-                            SDL_Rect texture_destination;
-                            texture_destination.x = 0;
-                            texture_destination.y = 0;
-                            texture_destination.w = 100;
-                            texture_destination.h = 100;
+    SDL_Rect texture_destination;
+    texture_destination.x = 0;
+    texture_destination.y = 0;
+    texture_destination.w = 100;
+    texture_destination.h = 100;
 
-                            SDL_RenderClear(renderer);
-                            SDL_RenderCopy(renderer, image_texture, NULL, &texture_destination);
-                            SDL_RenderPresent(renderer);
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, image_texture, NULL, &texture_destination);
+    SDL_RenderPresent(renderer);
 
-                            SDL_FreeSurface(branco);
-                            SDL_DestroyWindow(window);
+    SDL_FreeSurface(branco);
+    SDL_DestroyWindow(window);
 
 }
 
-void telaMenu()
+void telaMenu() // gera tela de menu - obs - todas as funçoes telaxxxxx sao para gerar a tela de seu respectivo atributo (menu, acertos, erros etc).
 {
     SDL_Quit();
 
@@ -509,13 +533,13 @@ void telaMenu()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DE MENU
-    SDL_Surface *inicio = IMG_Load("images/menu.jpg");
+    SDL_Surface *inicio = IMG_Load("imagens/menu.jpg");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -547,7 +571,7 @@ void telaexplicamenu()
 
 
     //RENDERIZA IMAGEM DE MENU
-    SDL_Surface *inicio = IMG_Load("images/explicamenu.jpg");
+    SDL_Surface *inicio = IMG_Load("imagens/explicamenu.jpg");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -574,13 +598,13 @@ void telalistadeacertos()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DA LISTA
-    SDL_Surface *inicio = IMG_Load("images/listadeacertos.png");
+    SDL_Surface *inicio = IMG_Load("imagens/listadeacertos.png");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -606,13 +630,13 @@ void telalistadefesa()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DA LISTA
-    SDL_Surface *inicio = IMG_Load("images/listadefesa.png");
+    SDL_Surface *inicio = IMG_Load("imagens/listadefesa.png");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -639,13 +663,13 @@ void telaerro()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DA LISTA
-    SDL_Surface *inicio = IMG_Load("images/listaerro.png");
+    SDL_Surface *inicio = IMG_Load("imagens/listaerro.png");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -671,13 +695,13 @@ void telalistacompleta()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DA LISTA
-    SDL_Surface *inicio = IMG_Load("images/listacompleta.png");
+    SDL_Surface *inicio = IMG_Load("imagens/listacompleta.png");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
@@ -703,13 +727,13 @@ void estatistica()
 
 
     // CRIA JANELA
-    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 600, 300, 700, 414, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Penalty Simulator", 1100, 150, 700, 414, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 
     //RENDERIZA IMAGEM DA LISTA
-    SDL_Surface *inicio = IMG_Load("images/estatisticas.png");
+    SDL_Surface *inicio = IMG_Load("imagens/estatisticas.png");
     SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer, inicio);
 
     SDL_Rect texture_destination;
