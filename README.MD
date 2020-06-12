@@ -2,6 +2,7 @@
 
 # AEDII - PenaltySimulator - Simulador de Penaltes em C com interface SDL2
 Aplicação em desenvolvimento...
+
 ![menu](https://user-images.githubusercontent.com/29512626/84351781-67024b80-ab92-11ea-9a48-cae8fe07cde0.png)
 ## Objetivo
 Desenvolver uma aplicação, em linguagem C, para colocar em prática o conhecimento adquirido nas aulas teóricas de Algoritmos e Estrutura de Dados II. A aplicação desenvolvida simula cobranças de penaltes com intuito apenas educacional.
